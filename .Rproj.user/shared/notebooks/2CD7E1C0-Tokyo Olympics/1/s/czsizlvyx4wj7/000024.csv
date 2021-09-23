@@ -1,0 +1,16 @@
+"0","# number of team per event"
+"0","event_count <- teams %>% "
+"0","  count(event, sort = TRUE) %>% "
+"0","  ggplot(aes(x= reorder(event, n), y = n, fill= reorder)) +"
+"0","  geom_bar(stat = ""identity"") +"
+"0","  coord_flip()+"
+"0","  ggtitle(""Number of Teams per Event"")+"
+"0","  xlab(""Event Name"") +"
+"0","  ylab(""Event Count"")"
+"0","event_count"
+"2","Don't know how to automatically pick scale for object of type function. Defaulting to continuous.
+"
+"2","Error: Aesthetics must be valid data columns. Problematic aesthetic(s): fill = reorder. 
+Did you mistype the name of a data column or forget to add after_stat()?
+[90mRun `rlang::last_error()` to see where the error occurred.[39m
+"

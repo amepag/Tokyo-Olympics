@@ -1,0 +1,23 @@
+"0","#Team exploration "
+"0","teams <- clean_names(teams)"
+"0","teams <- rename(teams, country = noc)"
+"0",""
+"0","teams <- mutate(teams, name = as.factor(name),"
+"0","                discipline = as.factor(discipline),"
+"0","                event = as.factor(event))"
+"0","glimpse(teams)"
+"1","Rows: 743"
+"1",""
+"1","
+"
+"1","Columns: 4"
+"1",""
+"1","
+"
+"1","$ name       [3m[38;5;246m<fct>[39m[23m ""Belgium"", ""China"", ""China"", ""France"", ""Italy"", ""Japan"", ""Japan"", ""~
+$ discipline [3m[38;5;246m<fct>[39m[23m 3x3 Basketball, 3x3 Basketball, 3x3 Basketball, 3x3 Basketball, 3x3~
+$ country    [3m[38;5;246m<chr>[39m[23m ""Belgium"", ""People's Republic of China"", ""People's Republic of Chin~
+$ event      [3m[38;5;246m<fct>[39m[23m Men, Men, Women, Women, Women, Men, Women, Men, Women, Men, Men, Me~"
+"1",""
+"1","
+"

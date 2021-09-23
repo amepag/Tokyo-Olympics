@@ -1,0 +1,102 @@
+---
+title: "Tokyo Olympics in R"
+output: html_notebook
+---
+```{r}
+#setup the libraries
+library(DataExplorer)
+library(janitor)
+library(tidyverse)
+library(readxl)
+library(plotly)
+library(htmlwidgets)
+library(IRdisplay)
+```
+```{r}
+#data preparation 
+athletes <- read_excel("Athletes.xlsx")
+entries_gender <- read_excel("EntriesGender.xlsx")
+medals <- read_excel("Medals.xlsx")
+teams <- read_excel("Teams.xlsx")
+Coaches<- read_excel("Coaches.xlsx")
+```
+```{r}
+#Team exploration 
+teams <- clean_names(teams)
+teams <- rename(teams, country = noc)
+
+teams <- mutate(teams, name = as.factor(name),
+                discipline = as.factor(discipline),
+                event = as.factor(event))
+glimpse(teams)
+```
+
+
+```{r}
+# number and gender of teams per event
+event_count <- teams %>% 
+  count(event, sort = TRUE) %>% 
+ggplot(aes(x= reorder(event, n), y = n, fill= event)) +
+  geom_bar(stat = "identity", show.legend = FALSE) +
+  coord_flip()+
+  ggtitle("Number and gender of Teams per Event")+
+  xlab("Teams")+
+  ylab("Count")
+event_count
+```
+```{r}
+# number of team per discipline
+disc_count <- teams %>% 
+  count(discipline) %>% 
+  ggplot(aes(x = reorder(discipline, n), y = n, fill = discipline)) +
+  geom_bar(stat = "identity", show.legend = FALSE) +
+  coord_flip() +
+  ggtitle("Number of Teams per Discipline") +
+  xlab("Discipline Name") +
+  ylab("Team Count")
+
+disc_count
+```
+```{r}
+#athletes distribution (nationality)
+athletes_count <- athletes %>% 
+  count(NOC) %>%
+arrange(desc(n)) %>%
+  head(30) %>%
+ggplot(aes(x= reorder(NOC,n), y= n, fill= NOC))+
+ geom_bar(stat = "identity", show.legend = FALSE) +
+  coord_flip() +
+  ggtitle("Top 30 Number of Athletes per Nations  ") +
+  xlab("Discipline Name") +
+  ylab("Count") 
+athletes_count
+```
+
+```{r}
+#reorganize medals data 
+medals <- clean_names(medals)
+medals <- rename(medals, country = team_noc)
+medals <- mutate(medals, gold = as.numeric(gold),
+                 silver = as.numeric(silver),
+                 bronze = as.numeric(bronze),
+                 total = as.numeric(total),
+                 rank_by_total = as.numeric(rank_by_total),
+                 rank = as.numeric(rank),
+                 country = as.factor(country))
+medals
+```
+```{r}
+#country by total medals
+total_medals <- medals %>% 
+arrange(desc(total)) %>%
+  head(30) %>%
+ggplot(aes(x= reorder(country,total), y= total, fill= country))+
+ geom_bar(stat = "identity", show.legend = FALSE) +
+  coord_flip() +
+  ggtitle("Top 30 Nations per total medals") +
+  xlab("Nations") +
+  ylab("Medals") 
+total_medals
+
+```
+

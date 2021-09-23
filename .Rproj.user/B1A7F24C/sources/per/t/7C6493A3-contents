@@ -1,0 +1,48 @@
+---
+title: "Tokyo Olympics in R"
+output: html_notebook
+---
+```{r}
+#setup the libraries
+library(DataExplorer)
+library(janitor)
+library(tidyverse)
+library(readxl)
+library(plotly)
+library(htmlwidgets)
+library(IRdisplay)
+```
+```{r}
+#data preparation 
+athletes <- read_excel("Athletes.xlsx")
+entries_gender <- read_excel("EntriesGender.xlsx")
+medals <- read_excel("Medals.xlsx")
+teams <- read_excel("Teams.xlsx")
+Coaches<- read_excel("Coaches.xlsx")
+```
+```{r}
+#Team exploration 
+teams <- clean_names(teams)
+teams <- rename(teams, country = noc)
+
+teams <- mutate(teams, name = as.factor(name),
+                discipline = as.factor(discipline),
+                event = as.factor(event))
+glimpse(teams)
+```
+
+
+```{r}
+# number of team per event
+event_count <- teams %>% 
+  count(event, sort = TRUE) %>% 
+  ggplot(aes(x= reorder(event, n), y = n, fill= )) +
+  geom_bar(stat = "identity") +
+  coord_flip()+
+  ggtitle("Number of Teams per Event")+
+  xlab("Event Name") +
+  ylab("Event Count")
+event_count
+```
+
+

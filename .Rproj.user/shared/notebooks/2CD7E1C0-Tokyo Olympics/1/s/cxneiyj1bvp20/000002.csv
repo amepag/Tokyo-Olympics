@@ -1,0 +1,6 @@
+"0","#data preparation "
+"0","athletes <- read_excel(""Athletes.xlsx"")"
+"0","entries_gender <- read_excel(""EntriesGender.xlsx"")"
+"0","medals <- read_excel(""Medals.xlsx"")"
+"0","teams <- read_excel(""Teams.xlsx"")"
+"0","Coaches<- read_excel(""Coaches.xlsx"")"

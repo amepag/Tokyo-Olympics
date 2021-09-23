@@ -1,0 +1,8 @@
+"0","#setup the libraries"
+"0","library(DataExplorer)"
+"0","library(janitor)"
+"0","library(tidyverse)"
+"0","library(readxl)"
+"0","library(plotly)"
+"0","library(htmlwidgets)"
+"0","library(IRdisplay)"
